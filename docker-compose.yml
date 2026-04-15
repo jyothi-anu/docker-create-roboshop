@@ -48,6 +48,7 @@ services:
     container_name: shipping
     depends_on:
       - mysql
+      - cart
 
   mysql:
     build: ./mysql
