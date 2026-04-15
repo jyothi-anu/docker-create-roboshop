@@ -42,6 +42,35 @@ services:
       - user
       - cart
 
+  shipping:
+    build: ./shipping
+    image: josh3626/shipping:1.0.0
+    container_name: shipping
+    depends_on:
+      - mysql
+
+  mysql:
+    build: ./mysql
+    image: josh3626/mysql:1.0.0
+    container_name: mysql
+    environment:
+      -  MYSQL_ROOT_PASSWORD:Roboshop@1
+
+  rabbitmq:
+    image: rabbitmq:3
+    environment:
+      - RABBITMQ_DEFAULT_USER=roboshop
+      - RABBITMQ_DEFAULT_PASS=roboshop123
+
+  payment:
+    build: ./build
+    image: josh3626/build:1.0.0
+    container_name: build
+    depends_on:
+      - rabbitmq
+      - user
+      - cart
+
 networks:
   default:
     driver: bridge
