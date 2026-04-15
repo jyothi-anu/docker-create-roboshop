@@ -1,0 +1,38 @@
+services:
+  catalogue:
+    build: ./catalogue
+    image: josh3626/catalogue:1.0.0
+    container_name: catalogue
+    depends_on:
+      - mongodb
+
+  mongodb:
+    build: ./mongodb
+    image: josh3626/mongodb:1.0.0
+    container_name: mongodb
+
+  user:
+    build: ./user
+    image: josh3626/user:1.0.0
+    container_name: user
+    depends_on:
+      - mongodb
+      - redis
+  
+  redis:
+    image: redis:7.0
+    container_name: redis
+
+  cart:
+    build: ./cart
+    image: josh3626.cart:1.0.0
+    container_name: cart
+    depends_on:
+      - catalogue
+      - redis
+
+networks:
+  default:
+    driver: bridge
+    name: roboshop
+    external: false
