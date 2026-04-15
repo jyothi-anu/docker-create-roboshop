@@ -50,12 +50,19 @@ services:
       - mysql
       - cart
 
+  # mysql:
+  #   build: ./mysql
+  #   image: josh3626/mysql:1.0.0
+  #   container_name: mysql
+  #   environment:
+  #     -  MYSQL_ROOT_PASSWORD:Roboshop@1
+
   mysql:
     build: ./mysql
     image: josh3626/mysql:1.0.0
     container_name: mysql
     environment:
-      -  MYSQL_ROOT_PASSWORD:Roboshop@1
+      MYSQL_ROOT_PASSWORD: "Roboshop@1"
 
   rabbitmq:
     image: rabbitmq:3
